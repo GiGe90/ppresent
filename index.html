@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Indovinello Natalizio della Sfinge</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        /* Nascondere "quiz", "regalo", "contatta" */
+        nav ul:nth-of-type(2) {
+            display: none; /* Nasconde la barra dei link secondari */
+        }
+
+        /* Cambiare il colore del bottone "Rispondi" */
+        button {
+            background-color: #DAA520; /* Colore oro scuro */
+            color: white; /* Contrasto leggibile */
+            border: none; /* Senza bordi */
+            padding: 10px 20px;
+            border-radius: 5px; /* Bordi arrotondati */
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #C18410; /* Tonalità più scura al passaggio del mouse */
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>La Sfinge di Natale</strong></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Benvenuta al Quiz Natalizio!</h2>
+                    <h3>Risolvi l'enigma della Sfinge per ricevere il tuo regalo!</h3>
+                </hgroup>
+                <p>La Sfinge, con il suo cappello di Babbo Natale, ti aspetta per proporti un indovinello. Riuscirai a rispondere correttamente e a sbloccare il tuo dono?</p>
+                <figure>
+                    <img src="Sfinge.webp" alt="Sfinge con cappello di Babbo Natale in un villaggio natalizio magico">
+                </figure>
+
+                <h3>Indovinello:</h3>
+                <p>"Cosa cammina a quattro zampe al mattino, due a mezzogiorno e tre alla sera, ma oggi porta con sé un bastone natalizio?"</p>
+
+                <h4>Risposte:</h4>
+                <form id="first-question">
+                    <label>
+                        <input type="radio" name="answer" value="1"> Un albero di Natale vivente
+                    </label><br>
+                    <label>
+                        <input type="radio" name="answer" value="2"> Un uomo, ma con lo spirito natalizio
+                    </label><br>
+                    <label>
+                        <input type="radio" name="answer" value="3"> Una renna con un cappello rosso
+                    </label><br><br>
+                    <button type="button" onclick="checkFirstAnswer()">Rispondi</button>
+                </form>
+                <div id="second-question" style="display: none;">
+                    <h3>Prossima domanda:</h3>
+                    <p>"Quale regalo porta lo spirito natalizio?"</p>
+                    <form id="second-question-form">
+                        <label>
+                            <input type="radio" name="gift" value="1"> Una fuga alle terme
+                        </label><br>
+                        <label>
+                            <input type="radio" name="gift" value="2"> Un completino sexy
+                        </label><br>
+                        <label>
+                            <input type="radio" name="gift" value="3"> Una cena romantica
+                        </label><br><br>
+                        <button type="button" onclick="checkSecondAnswer()">Rispondi</button>
+                    </form>
+                </div>
+                <p id="result"></p>
+            </section>
+        </div>
+    </main>
+
+    <section aria-label="Scarica il regalo" id="regalo" style="display: none;">
+        <div class="container">
+            <article>
+                <hgroup>
+                    <h2>Hai risposto correttamente!</h2>
+                    <h3>Guarda il tuo regalo qui sotto!</h3>
+                </hgroup>
+                <form class="grid">
+                    
+    <div class="grid">
+        <img src="Regalo_imm.PNG" alt="Regalo" style="max-width: 100%; height: auto;">
+    </div>
+    
+                </form>
+            </article>
+        </div>
+    </section>
+
+    <footer class="container">
+    </footer>
+
+    <script>
+        function checkFirstAnswer() {
+            const answers = document.getElementsByName('answer');
+            let selectedAnswer;
+            for (const answer of answers) {
+                if (answer.checked) {
+                    selectedAnswer = answer.value;
+                }
+            }
+
+            const result = document.getElementById('result');
+            if (selectedAnswer === '2') {
+                result.textContent = 'Esatto! Ecco la prossima domanda.';
+                document.getElementById('first-question').style.display = 'none';
+                document.getElementById('second-question').style.display = 'block';
+            } else {
+                result.textContent = 'Risposta errata! Riprova.';
+            }
+        }
+
+        function checkSecondAnswer() {
+            const gifts = document.getElementsByName('gift');
+            let selectedGift;
+            for (const gift of gifts) {
+                if (gift.checked) {
+                    selectedGift = gift.value;
+                }
+            }
+
+            const result = document.getElementById('result');
+            if (selectedGift === '1') {
+                result.textContent = 'Corretto! Il regalo è sbloccato.';
+                document.getElementById('regalo').style.display = 'block';
+            } else {
+                result.textContent = 'Non è questo il regalo giusto. Riprova.';
+            }
+        }
+
+        function downloadGift() {
+            window.location.href = 'https://example.com/il-tuo-regalo.pdf';
+        }
+    </script>
+</body>
+</html>
